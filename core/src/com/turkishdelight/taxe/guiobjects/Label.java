@@ -67,7 +67,7 @@ public class Label extends SpriteComponent {
 	@Override
 	public void draw(Batch batch)
 	{
-		//We draw the texture first, then the text
+		// Draw the texture first, then the text
 		super.draw(batch);
 		
 		float originX = 0;

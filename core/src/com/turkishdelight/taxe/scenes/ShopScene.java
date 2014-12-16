@@ -15,10 +15,12 @@ public class ShopScene extends Scene {
 	SpriteComponent player1Money;
 	SpriteComponent player1Fuel;
 	SpriteComponent activePlayer1Indicator;
+	Label player1NameLabel;
 	
 	SpriteComponent player2Money;
 	SpriteComponent player2Fuel;
 	SpriteComponent activePlayer2Indicator;
+	Label player2NameLabel;
 	
 	public void onCreate()
 	{
@@ -60,7 +62,7 @@ public class ShopScene extends Scene {
 		
 		// Create player 1 name label
 		Texture player1LabelText = new Texture("Clear_Button.png");
-		Label player1NameLabel = new Label(this, player1LabelText, Label.genericFont(Color.BLUE, 40));
+		player1NameLabel = new Label(this, player1LabelText, Label.genericFont(Color.BLUE, 40));
 		player1NameLabel.setText("PLAYER 1");
 		player1NameLabel.setPosition(36, 715);
 		player1NameLabel.setAlignment(0);
@@ -97,7 +99,7 @@ public class ShopScene extends Scene {
 		
 		// Create player 2 name label
 		Texture player2LabelText = new Texture("Clear_Button.png");
-		Label player2NameLabel = new Label(this, player2LabelText, Label.genericFont(Color.LIGHT_GRAY, 40));
+		player2NameLabel = new Label(this, player2LabelText, Label.genericFont(Color.LIGHT_GRAY, 40));
 		player2NameLabel.setText("PLAYER 2");
 		player2NameLabel.setPosition(985, 715);
 		player2NameLabel.setAlignment(2);
