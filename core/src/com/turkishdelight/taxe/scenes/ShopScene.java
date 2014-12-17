@@ -361,8 +361,8 @@ public class ShopScene extends Scene {
 	{
 		player1NameLabel.getFont().setColor(Color.BLUE);
 		player1ScoreLabel.getFont().setColor(Color.BLUE);
-		player1MoneyLabel.getFont().setColor(Color.BLUE);
-		player1FuelLabel.getFont().setColor(Color.BLUE);
+		player1MoneyLabel.getFont().setColor(Color.MAROON);
+		player1FuelLabel.getFont().setColor(Color.TEAL);
 		player1Money.setAlpha(1);
 		player1Fuel.setAlpha(1);
 		activePlayer1Indicator.setAlpha(1);
@@ -388,8 +388,8 @@ public class ShopScene extends Scene {
 		
 		player2NameLabel.getFont().setColor(Color.BLUE);
 		player2ScoreLabel.getFont().setColor(Color.BLUE);
-		player2MoneyLabel.getFont().setColor(Color.BLUE);
-		player2FuelLabel.getFont().setColor(Color.BLUE);
+		player2MoneyLabel.getFont().setColor(Color.MAROON);
+		player2FuelLabel.getFont().setColor(Color.TEAL);
 		player2Money.setAlpha(1);
 		player2Fuel.setAlpha(1);
 		activePlayer2Indicator.setAlpha(1);
