@@ -3,6 +3,7 @@ package com.turkishdelight.taxe.scenes;
 import com.turkishdelight.taxe.Scene;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.turkishdelight.taxe.Game;
 import com.turkishdelight.taxe.SpriteComponent;
@@ -31,7 +32,6 @@ public class ShopScene extends Scene {
 	
 	public void onCreate()
 	{
-		
 		// Create background image for shop
 		Texture trainsText = new Texture("Shop_Trains.png");
 		shop = new SpriteComponent(this, trainsText, Game.shopZ);
@@ -40,6 +40,22 @@ public class ShopScene extends Scene {
 		Add(shop);
 		// ---------------------
 		
+		// Draw player 1 info on create
+		drawPlayer1Info();
+		
+		// Draw player 2 info on create
+		drawPlayer2Info();
+		
+		// Draw window buttons (Trains, Obstacles and Resources) on create
+		drawWindowButtons();
+		
+		// Draw toolbar buttons on create
+		drawToolbarButtons();
+		
+	}
+	
+	public void drawPlayer1Info()
+	{
 		// Create player 1 name label
 		Texture player1LabelText = new Texture("Clear_Button.png");
 		player1NameLabel = new Label(this, player1LabelText, Label.genericFont(Color.BLUE, 40));
@@ -100,8 +116,10 @@ public class ShopScene extends Scene {
 		player1FuelLabel.setAlignment(0);
 		Add(player1FuelLabel);
 		// ---------------------
-		
-		
+	}
+	
+	public void drawPlayer2Info()
+	{
 		// Create player 2 name label
 		Texture player2LabelText = new Texture("Clear_Button.png");
 		player2NameLabel = new Label(this, player2LabelText, Label.genericFont(Color.LIGHT_GRAY, 40));
@@ -165,8 +183,11 @@ public class ShopScene extends Scene {
 		player2Money.setAlpha((float) 0.4);
 		Add(player2Money);
 		// ---------------------
-		
-		
+	}
+	
+	public void drawWindowButtons()
+
+	{
 		// Create Train button
 		Button trainButton = new Button(this) {
 			@Override
@@ -209,6 +230,11 @@ public class ShopScene extends Scene {
 		resourceButton.setTexture(buttonText);
 		Add(resourceButton);
 		// ---------------------
+	}
+	
+	public void drawToolbarButtons()
+	{
+		Texture buttonText = new Texture("Clear_Button.png");
 		
 		// Create Next Go button
 		Button nextGoButton = new Button(this) {
@@ -265,7 +291,6 @@ public class ShopScene extends Scene {
 		resourcesToolbarButton.setTexture(buttonText);
 		Add(resourcesToolbarButton);
 		// ---------------------
-		
 	}
 	
 	public void trainPressed()
@@ -301,9 +326,20 @@ public class ShopScene extends Scene {
 		
 	}
 	
+	boolean player1Go = true;
+	
 	public void nextGoPressed()
 	{
 		System.out.println("nextGoPressed");
+		
+		if (player1Go) {	
+			player2Active(); 
+		}
+		else {
+			player1Active(); 
+		}
+		
+		player1Go = !player1Go;
 	}
 	
 	public void shopToolbarPressed() 
@@ -319,6 +355,44 @@ public class ShopScene extends Scene {
 	public void resourceToolbarPressed() 
 	{
 		System.out.println("resourceToolbarPressed");
+	}
+	
+	public void player1Active()
+	{
+		player1NameLabel.getFont().setColor(Color.BLUE);
+		player1ScoreLabel.getFont().setColor(Color.BLUE);
+		player1MoneyLabel.getFont().setColor(Color.BLUE);
+		player1FuelLabel.getFont().setColor(Color.BLUE);
+		player1Money.setAlpha(1);
+		player1Fuel.setAlpha(1);
+		activePlayer1Indicator.setAlpha(1);
+		
+		player2NameLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player2ScoreLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player2MoneyLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player2FuelLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player2Money.setAlpha((float) 0.4);
+		player2Fuel.setAlpha((float) 0.4);
+		activePlayer2Indicator.setAlpha((float) 0.4);
+	}
+	
+	public void player2Active()
+	{
+		player1NameLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player1ScoreLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player1MoneyLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player1FuelLabel.getFont().setColor(Color.LIGHT_GRAY);
+		player1Money.setAlpha((float) 0.4);
+		player1Fuel.setAlpha((float) 0.4);
+		activePlayer1Indicator.setAlpha((float) 0.4);
+		
+		player2NameLabel.getFont().setColor(Color.BLUE);
+		player2ScoreLabel.getFont().setColor(Color.BLUE);
+		player2MoneyLabel.getFont().setColor(Color.BLUE);
+		player2FuelLabel.getFont().setColor(Color.BLUE);
+		player2Money.setAlpha(1);
+		player2Fuel.setAlpha(1);
+		activePlayer2Indicator.setAlpha(1);
 	}
 
 }

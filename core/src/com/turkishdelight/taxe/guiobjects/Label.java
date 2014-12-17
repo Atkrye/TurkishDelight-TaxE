@@ -37,7 +37,7 @@ public class Label extends SpriteComponent {
 		parameter.size = fontSize;
 		BitmapFont font = generator.generateFont(parameter);
 		
-		//Set the color of the font and return is
+		//Set the color of the font and return it
 		font.setColor(fontColor);
 		generator.dispose();
 		return font;
