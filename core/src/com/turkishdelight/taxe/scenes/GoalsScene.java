@@ -356,6 +356,8 @@ public class GoalsScene extends Scene {
 	public void resourcesToolbarPressed() 
 	{
 		System.out.println("resourcesToolbarPressed");
+		
+		Game.setScene(new CurrentResourcesScene());
 	}
 	
 	public void player1Active()
