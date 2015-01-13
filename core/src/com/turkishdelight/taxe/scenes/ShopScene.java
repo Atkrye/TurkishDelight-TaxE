@@ -5,6 +5,8 @@ import com.turkishdelight.taxe.Game;
 import com.turkishdelight.taxe.Player;
 import com.turkishdelight.taxe.SpriteComponent;
 import com.turkishdelight.taxe.guiobjects.Button;
+import com.turkishdelight.taxe.guiobjects.Pane;
+import com.turkishdelight.taxe.guiobjects.Scroller;
 
 public class ShopScene extends GameWindowedGUIScene {
 
@@ -23,8 +25,47 @@ public class ShopScene extends GameWindowedGUIScene {
 		shop.setPosition(0, 0);
 		shop.setSize(Game.targetWindowsWidth, Game.targetWindowsHeight);
 		Add(shop);
+		
+		drawTrainsScrollpane();
 	}
 	
+	public void drawTrainsScrollpane()
+	{
+		final Pane pane = new Pane(this, -1);
+		pane.setSize(922, 800);
+		pane.setPosition(50, 485 - pane.getHeight());
+		Add(pane);
+		
+		Texture scrollPaneBackgroundText = new Texture("Shop_Trains_Scrollpane.png");
+		SpriteComponent scrollPaneBackground = new SpriteComponent(this, scrollPaneBackgroundText, Game.guiZ);
+		scrollPaneBackground.setSize(922,800);
+		scrollPaneBackground.setLocalPosition(0, 0);
+		pane.Add(scrollPaneBackground);
+		
+		//Min Y is the position the pane must be in to show it's lowest content
+		//Max Y is the position the pane must be in to show it's highest content
+		final float minY = 73;
+		final float maxY = 485 - pane.getHeight();
+
+		final Scroller scrollPane = new Scroller(this, Button.text, Game.guiZ) {
+					@Override
+					public void onMove(float percentage)
+					{
+						pane.setY(((maxY - minY) * percentage) + minY);
+					}
+		};
+		scrollPane.setOrientation(false);
+		scrollPane.setSize(15, 30);
+		scrollPane.setRange(74, 454);
+		scrollPane.setPosition(35, 454);
+		Add(scrollPane);
+		
+		Texture test = new Texture("Button.png");
+		SpriteComponent pc1 = new SpriteComponent(this, test, Game.guiZ);
+		pc1.setSize(100, 50);
+		pc1.setLocalPosition(300, 300);
+		pane.Add(pc1);
+	}
 	
 	@Override
 	public void drawWindowButtons()
