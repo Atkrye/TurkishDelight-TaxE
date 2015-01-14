@@ -18,6 +18,13 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 	SpriteComponent currentResources;
 	SpriteComponent scrollPaneBackground;
 	
+	SpriteComponent steamInUse;
+	SpriteComponent dieselInUse;
+	SpriteComponent electricInUse;
+	SpriteComponent nuclearInUse;
+	SpriteComponent magLevInUse;
+	SpriteComponent kingInUse;
+	
 	@Override
 	public void drawGUIBackground()
 	{
@@ -66,47 +73,55 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		Texture inUseText = new Texture("in-use.png");
 
 		// Create Steam In Use sprite
-		SpriteComponent steamInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		steamInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		steamInUse.setLocalPosition(65, 555);
 		steamInUse.setSize(115,34);
+		steamInUse.setAlpha(1);
 		pane.Add(steamInUse);
 		// ---------------------
 		
 		// Create Diesel In Use sprite
-		SpriteComponent dieselInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		dieselInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		dieselInUse.setLocalPosition(530, 555);
 		dieselInUse.setSize(115,34);
+		dieselInUse.setAlpha(1);
 		pane.Add(dieselInUse);
 		// ---------------------
 		
 		// Create Electric In Use sprite
-		SpriteComponent electricInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		electricInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		electricInUse.setLocalPosition(65, 305);
 		electricInUse.setSize(115,34);
+		electricInUse.setAlpha(1);
 		pane.Add(electricInUse);
 		// ---------------------
 		
 		// Create Nuclear In Use sprite
-		SpriteComponent nuclearInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		nuclearInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		nuclearInUse.setLocalPosition(530, 305);
 		nuclearInUse.setSize(115,34);
+		nuclearInUse.setAlpha(1);
 		pane.Add(nuclearInUse);
 		// ---------------------
 		
 		// Create MagLev In Use sprite
-		SpriteComponent magLevInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		magLevInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		magLevInUse.setLocalPosition(65, 45);
 		magLevInUse.setSize(115,34);
+		magLevInUse.setAlpha(1);
 		pane.Add(magLevInUse);
 		// ---------------------
 		
 		// Create King In Use sprite
-		SpriteComponent kingInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		kingInUse = new SpriteComponent(this, inUseText, Game.guiZ);
 		kingInUse.setLocalPosition(530, 45);
 		kingInUse.setSize(115,34);
+		kingInUse.setAlpha(1);
 		pane.Add(kingInUse);
 		// ---------------------
+
 	}
+
 	
 	@Override
 	public void drawWindowButtons()
@@ -157,6 +172,15 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
 		// ---------------------
 		
+		// Set in use sprites to be visible
+		steamInUse.setAlpha(1);
+		dieselInUse.setAlpha(1);
+		electricInUse.setAlpha(1);
+		nuclearInUse.setAlpha(1);
+		magLevInUse.setAlpha(1);
+		kingInUse.setAlpha(1);
+		// ---------------------
+		
 	}
 	
 	public void obstaclesPressed()
@@ -171,6 +195,15 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		// Create obstacles scrollpane background texture and assign to the scrollpane
 		Texture scrollPaneBackgroundText = new Texture("Obstacles_Scrollpane_Background.png");
 		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
+		// ---------------------
+		
+		// Set in use sprites to be transparent
+		steamInUse.setAlpha(0);
+		dieselInUse.setAlpha(0);
+		electricInUse.setAlpha(0);
+		nuclearInUse.setAlpha(0);
+		magLevInUse.setAlpha(0);
+		kingInUse.setAlpha(0);
 		// ---------------------
 		
 	}
