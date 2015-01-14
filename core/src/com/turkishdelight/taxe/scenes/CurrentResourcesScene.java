@@ -5,6 +5,8 @@ import com.turkishdelight.taxe.Game;
 import com.turkishdelight.taxe.Player;
 import com.turkishdelight.taxe.SpriteComponent;
 import com.turkishdelight.taxe.guiobjects.Button;
+import com.turkishdelight.taxe.guiobjects.Pane;
+import com.turkishdelight.taxe.guiobjects.Scroller;
 
 public class CurrentResourcesScene extends GameWindowedGUIScene {
 	
@@ -14,6 +16,7 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 	}
 
 	SpriteComponent currentResources;
+	SpriteComponent scrollPaneBackground;
 	
 	@Override
 	public void drawGUIBackground()
@@ -25,6 +28,84 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		currentResources.setSize(Game.targetWindowsWidth, Game.targetWindowsHeight);
 		Add(currentResources);
 		
+		drawCurrentResourcesScrollpane();
+	}
+	
+	public void drawCurrentResourcesScrollpane()
+	{
+		final Pane pane = new Pane(this, -1);
+		pane.setSize(922, 800);
+		pane.setPosition(50, 485 - pane.getHeight());
+		Add(pane);
+		
+		Texture scrollPaneBackgroundText = new Texture("Trains_Scrollpane_Background.png");
+		scrollPaneBackground = new SpriteComponent(this, scrollPaneBackgroundText, Game.guiZ);
+		scrollPaneBackground.setSize(922,800);
+		scrollPaneBackground.setLocalPosition(0, 0);
+		pane.Add(scrollPaneBackground);
+		
+		//Min Y is the position the pane must be in to show it's lowest content
+		//Max Y is the position the pane must be in to show it's highest content
+		final float minY = 73;
+		final float maxY = 485 - pane.getHeight();
+		
+		Texture scrollerText = new Texture("Scroller.png");
+		final Scroller scrollPane = new Scroller(this, scrollerText, Game.guiZ) {
+					@Override
+					public void onMove(float percentage)
+					{
+						pane.setY(((maxY - minY) * percentage) + minY);
+					}
+		};
+		scrollPane.setOrientation(false);
+		scrollPane.setSize(15, 30);
+		scrollPane.setRange(74, 454);
+		scrollPane.setPosition(35, 454);
+		Add(scrollPane);
+		
+		Texture inUseText = new Texture("in-use.png");
+
+		// Create Steam In Use sprite
+		SpriteComponent steamInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		steamInUse.setLocalPosition(65, 555);
+		steamInUse.setSize(115,34);
+		pane.Add(steamInUse);
+		// ---------------------
+		
+		// Create Diesel In Use sprite
+		SpriteComponent dieselInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		dieselInUse.setLocalPosition(530, 555);
+		dieselInUse.setSize(115,34);
+		pane.Add(dieselInUse);
+		// ---------------------
+		
+		// Create Electric In Use sprite
+		SpriteComponent electricInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		electricInUse.setLocalPosition(65, 305);
+		electricInUse.setSize(115,34);
+		pane.Add(electricInUse);
+		// ---------------------
+		
+		// Create Nuclear In Use sprite
+		SpriteComponent nuclearInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		nuclearInUse.setLocalPosition(530, 305);
+		nuclearInUse.setSize(115,34);
+		pane.Add(nuclearInUse);
+		// ---------------------
+		
+		// Create MagLev In Use sprite
+		SpriteComponent magLevInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		magLevInUse.setLocalPosition(65, 45);
+		magLevInUse.setSize(115,34);
+		pane.Add(magLevInUse);
+		// ---------------------
+		
+		// Create King In Use sprite
+		SpriteComponent kingInUse = new SpriteComponent(this, inUseText, Game.guiZ);
+		kingInUse.setLocalPosition(530, 45);
+		kingInUse.setSize(115,34);
+		pane.Add(kingInUse);
+		// ---------------------
 	}
 	
 	@Override
@@ -71,6 +152,11 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		currentResources.setTexture(trainsText);
 		// ---------------------
 		
+		// Create trains scrollpane background texture and assign to the scrollpane
+		Texture scrollPaneBackgroundText = new Texture("Trains_Scrollpane_Background.png");
+		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
+		// ---------------------
+		
 	}
 	
 	public void obstaclesPressed()
@@ -80,6 +166,11 @@ public class CurrentResourcesScene extends GameWindowedGUIScene {
 		// Create obstacles texture and set current resources window background to be for obstacles tab.
 		Texture obstaclesText = new Texture("Current_Resources_Obstacles.png");
 		currentResources.setTexture(obstaclesText);
+		// ---------------------
+		
+		// Create obstacles scrollpane background texture and assign to the scrollpane
+		Texture scrollPaneBackgroundText = new Texture("Obstacles_Scrollpane_Background.png");
+		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
 		// ---------------------
 		
 	}

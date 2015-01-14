@@ -1,16 +1,21 @@
 package com.turkishdelight.taxe.scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.turkishdelight.taxe.Game;
 import com.turkishdelight.taxe.Player;
 import com.turkishdelight.taxe.SpriteComponent;
 import com.turkishdelight.taxe.guiobjects.Button;
+import com.turkishdelight.taxe.guiobjects.Label;
+import com.turkishdelight.taxe.guiobjects.LabelButton;
 import com.turkishdelight.taxe.guiobjects.Pane;
 import com.turkishdelight.taxe.guiobjects.Scroller;
 
 public class ShopScene extends GameWindowedGUIScene {
 
 	SpriteComponent shop;
+	SpriteComponent scrollPaneBackground;
+	
 	public ShopScene(GameScene parent, Player player1, Player player2)
 	{
 		super(parent, player1, player2);
@@ -25,6 +30,7 @@ public class ShopScene extends GameWindowedGUIScene {
 		shop.setPosition(0, 0);
 		shop.setSize(Game.targetWindowsWidth, Game.targetWindowsHeight);
 		Add(shop);
+		// ---------------------
 		
 		drawTrainsScrollpane();
 	}
@@ -36,8 +42,8 @@ public class ShopScene extends GameWindowedGUIScene {
 		pane.setPosition(50, 485 - pane.getHeight());
 		Add(pane);
 		
-		Texture scrollPaneBackgroundText = new Texture("Shop_Trains_Scrollpane.png");
-		SpriteComponent scrollPaneBackground = new SpriteComponent(this, scrollPaneBackgroundText, Game.guiZ);
+		Texture scrollPaneBackgroundText = new Texture("Trains_Scrollpane_Background.png");
+		scrollPaneBackground = new SpriteComponent(this, scrollPaneBackgroundText, Game.guiZ);
 		scrollPaneBackground.setSize(922,800);
 		scrollPaneBackground.setLocalPosition(0, 0);
 		pane.Add(scrollPaneBackground);
@@ -46,8 +52,9 @@ public class ShopScene extends GameWindowedGUIScene {
 		//Max Y is the position the pane must be in to show it's highest content
 		final float minY = 73;
 		final float maxY = 485 - pane.getHeight();
-
-		final Scroller scrollPane = new Scroller(this, Button.text, Game.guiZ) {
+		
+		Texture scrollerText = new Texture("Scroller.png");
+		final Scroller scrollPane = new Scroller(this, scrollerText, Game.guiZ) {
 					@Override
 					public void onMove(float percentage)
 					{
@@ -60,11 +67,109 @@ public class ShopScene extends GameWindowedGUIScene {
 		scrollPane.setPosition(35, 454);
 		Add(scrollPane);
 		
-		Texture test = new Texture("Button.png");
-		SpriteComponent pc1 = new SpriteComponent(this, test, Game.guiZ);
-		pc1.setSize(100, 50);
-		pc1.setLocalPosition(300, 300);
-		pane.Add(pc1);
+		Texture buyButtonText = new Texture("buy_bg.png");
+		
+		// Create Steam button
+		LabelButton steamButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				steamPressed();
+			}
+		};
+		steamButton.setLocalPosition(65, 555);
+		steamButton.setSize(115, 34);
+		steamButton.setTexture(buyButtonText);
+		steamButton.setText("Buy: 10cr");
+		steamButton.setAlignment(1);
+		steamButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(steamButton);
+		// ---------------------
+		
+		// Create Diesel button
+		LabelButton dieselButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				dieselPressed();
+			}
+		};
+		dieselButton.setLocalPosition(530, 555);
+		dieselButton.setSize(115, 34);
+		dieselButton.setTexture(buyButtonText);
+		dieselButton.setText("Buy: 30cr");
+		dieselButton.setAlignment(1);
+		dieselButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(dieselButton);
+		// ---------------------
+		
+		// Create Electric button
+		LabelButton electricButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				electricPressed();
+			}
+		};
+		electricButton.setLocalPosition(65, 305);
+		electricButton.setSize(115, 34);
+		electricButton.setTexture(buyButtonText);
+		electricButton.setText("Buy: 90cr");
+		electricButton.setAlignment(1);
+		electricButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(electricButton);
+		// ---------------------
+		
+		// Create Nuclear button
+		LabelButton nuclearButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				nuclearPressed();
+			}
+		};
+		nuclearButton.setLocalPosition(530, 305);
+		nuclearButton.setSize(115, 34);
+		nuclearButton.setTexture(buyButtonText);
+		nuclearButton.setText("Buy: 200cr");
+		nuclearButton.setAlignment(1);
+		nuclearButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(nuclearButton);
+		// ---------------------
+		
+		// Create MagLev button
+		LabelButton magLevButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				magLevPressed();
+			}
+		};
+		magLevButton.setLocalPosition(65, 45);
+		magLevButton.setSize(115, 34);
+		magLevButton.setTexture(buyButtonText);
+		magLevButton.setText("Buy: 500cr");
+		magLevButton.setAlignment(1);
+		magLevButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(magLevButton);
+		// ---------------------
+		
+		// Create King button
+		LabelButton kingButton = new LabelButton(this) {
+			@Override
+			public void onClickEnd()
+			{
+				kingPressed();
+			}
+		};
+		kingButton.setLocalPosition(530, 45);
+		kingButton.setSize(115, 34);
+		kingButton.setTexture(buyButtonText);
+		kingButton.setText("Buy: 1000cr");
+		kingButton.setAlignment(1);
+		kingButton.setFont(Label.genericFont(Color.WHITE, 22));
+		pane.Add(kingButton);
+		// ---------------------
 	}
 	
 	@Override
@@ -124,6 +229,11 @@ public class ShopScene extends GameWindowedGUIScene {
 		shop.setTexture(trainsText);
 		// ---------------------
 		
+		// Create trains scrollpane background texture and assign to the scrollpane
+		Texture scrollPaneBackgroundText = new Texture("Trains_Scrollpane_Background.png");
+		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
+		// ---------------------
+		
 	}
 	
 	public void obstaclePressed()
@@ -133,6 +243,11 @@ public class ShopScene extends GameWindowedGUIScene {
 		// Create obstacles texture and set shop window background to be obstacles.
 		Texture obstaclesText = new Texture("Shop_Obstacles.png");
 		shop.setTexture(obstaclesText);
+		// ---------------------
+		
+		// Create obstacles scrollpane background texture and assign to the scrollpane
+		Texture scrollPaneBackgroundText = new Texture("Obstacles_Scrollpane_Background.png");
+		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
 		// ---------------------
 		
 	}
@@ -146,6 +261,11 @@ public class ShopScene extends GameWindowedGUIScene {
 		shop.setTexture(resourcesText);
 		// ---------------------
 		
+		// Create resources scrollpane background texture and assign to the scrollpane
+		Texture scrollPaneBackgroundText = new Texture("Obstacles_Scrollpane_Background.png");
+		scrollPaneBackground.setTexture(scrollPaneBackgroundText);
+		// ---------------------
+		
 	}
 	
 	@Override
@@ -153,5 +273,36 @@ public class ShopScene extends GameWindowedGUIScene {
 	{
 		System.out.println("shopToolbarPressed");
 		//DO Nothing
+	}
+	
+	public void steamPressed()
+	{
+		System.out.println("steamPressed");
+		
+	}
+	
+	public void dieselPressed()
+	{
+		System.out.println("dieselPressed");
+	}
+	
+	public void electricPressed()
+	{
+		System.out.println("electricPressed");
+	}
+	
+	public void nuclearPressed()
+	{
+		System.out.println("nuclearPressed");
+	}
+	
+	public void magLevPressed()
+	{
+		System.out.println("magLevPressed");
+	}
+	
+	public void kingPressed()
+	{
+		System.out.println("kingPressed");
 	}
 }

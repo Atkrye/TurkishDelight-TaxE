@@ -76,9 +76,10 @@ public class LabelButton extends Button {
 		//We draw the texture first, then the text
 		super.draw(batch);
 		
+		TextBounds textBounds = font.getBounds(text);
+		float bounds = this.getX();
 		float originX = 0;
-		float originY = this.getY();
-		TextBounds bounds = font.getBounds(text);
+		float originY = this.getY() + (this.getHeight()/2) + (textBounds.height/2);
 		
 		// Left Alignment
 		if (alignment == 0) {
@@ -86,11 +87,11 @@ public class LabelButton extends Button {
 		}
 		// Centre aligned
 		else if (alignment == 1) {
-			originX = this.getX() - (bounds.width / 2);
+			originX = bounds + this.getWidth()/2 - textBounds.width/2;
 		}
 		// Right aligned
 		else if (alignment == 2) {
-			originX = this.getX() - bounds.width;
+			originX = bounds + this.getWidth()/2;
 		}
 
 		font.draw(batch, text, originX, originY);
